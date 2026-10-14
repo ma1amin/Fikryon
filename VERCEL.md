@@ -34,11 +34,11 @@ that prefix and route its HTML and assets into the sandbox service.
 No bindings are declared: no running server-side code currently calls another
 service. The Vite applications are browser-only; bindings resolve in functions
 at runtime and must never be embedded in a browser bundle or supplied manually.
-The main site's email subscription remains a simulated UI operation; deployment
-does not implement a subscription API or persistence.
-
-The API health endpoint does not use the database. `DATABASE_URL` is needed if
-code starts importing `@workspace/db`, which is currently unused by the routes.
+The browser submits to `/api/subscribe`; the API writes subscriber and email-job
+records in PostgreSQL and sends through Dynadot SMTP. Database and SMTP credentials
+are server-only variables. The API health endpoint stays available before these
+are configured. See [EMAIL_SETUP.md](EMAIL_SETUP.md) for migrations, environment
+variables, controlled testing, retries, and launch-mailing operation.
 
 ## Local verification
 

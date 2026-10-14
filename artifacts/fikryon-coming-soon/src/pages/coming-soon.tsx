@@ -1,9 +1,10 @@
-import { useEffect, useState, type FormEvent, type ReactNode } from "react";
+import { useEffect, useState, useRef, type FormEvent, type ReactNode } from "react";
 import { copy, type Lang } from "@/config/i18n";
 import {
   CONTACT_EMAIL, COUNTDOWN_START_DATE, LAUNCH_DATE, LINKEDIN_URL, LOGO_DARK_SRC, LOGO_LIGHT_SRC, TWITTER_URL, isPlaceholder,
 } from "@/config/site";
 import { usePreferences } from "@/hooks/use-preferences";
+import { subscribe as submitSubscription } from "@workspace/api-client-react";
 import { NetworkBackground } from "@/components/network-background";
 import {
   ArrowIcon, CheckIcon, LinkedInIcon, MailIcon, MoonIcon, SunIcon, XIcon,
@@ -154,29 +155,28 @@ function Countdown({ lang }: { lang: Lang }) {
 }
 
 /* ---------------- Notify form ---------------- */
-type Status = "idle" | "sending" | "success" | "error" | "invalid";
-
-async function subscribe(email: string): Promise<void> {
-  // EMAIL SUBSCRIPTION INTEGRATION HERE
-  // Replace this stub with a real call, e.g.:
-  //   await fetch("/api/subscribe", { method: "POST", headers: { "Content-Type": "application/json" },
-  //     credentials: "include", body: JSON.stringify({ email }) });
-  // Throw on failure so the UI shows the error state.
-  void email;
-  await new Promise((r) => setTimeout(r, 700));
-}
+type Status = "idle" | "sending" | "success" | "error" | "invalid" | "unsubscribed";
 
 function NotifyForm({ lang }: { lang: Lang }) {
   const t = copy[lang];
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<Status>("idle");
+  const [website, setWebsite] = useState("");
+  const sending = useRef(false);
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    if (sending.current) return;
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email.trim())) { setStatus("invalid"); return; }
     setStatus("sending");
-    try { await subscribe(email.trim()); setStatus("success"); setEmail(""); }
+    sending.current = true;
+    try {
+      const result = await submitSubscription({ email: email.trim(), lang, website });
+      setStatus(result.registered ? "success" : "unsubscribed");
+      if (result.registered) setEmail("");
+    }
     catch { setStatus("error"); }
+    finally { sending.current = false; }
   };
 
   return (
@@ -189,6 +189,11 @@ function NotifyForm({ lang }: { lang: Lang }) {
         </div>
       ) : (
         <form onSubmit={onSubmit} noValidate className="fk-form" data-state={status}>
+          <div hidden aria-hidden="true">
+            <label htmlFor="subscribe-website">Website</label>
+            <input id="subscribe-website" name="website" tabIndex={-1} autoComplete="off"
+              value={website} onChange={e => setWebsite(e.target.value)} />
+          </div>
           <label htmlFor="notify-email" className="sr-only">{t.emailLabel}</label>
           <MailIcon className="fk-form-icon" />
           <input
@@ -198,6 +203,7 @@ function NotifyForm({ lang }: { lang: Lang }) {
             autoComplete="email"
             dir="ltr"
             value={email}
+            disabled={status === "sending"}
             onChange={(e) => { setEmail(e.target.value); if (status !== "sending") setStatus("idle"); }}
             placeholder={t.placeholder}
             aria-invalid={status === "invalid"}
@@ -212,7 +218,7 @@ function NotifyForm({ lang }: { lang: Lang }) {
         </form>
       )}
       <p id="notify-msg" className="fk-form-msg" role="alert" data-testid="text-form-message">
-        {status === "invalid" ? t.invalid : status === "error" ? t.error : ""}
+        {status === "invalid" ? t.invalid : status === "error" ? t.error : status === "unsubscribed" ? t.unsubscribed : ""}
       </p>
     </section>
   );

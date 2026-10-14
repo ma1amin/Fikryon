@@ -3,6 +3,7 @@
   "compileOnSave": false,
   "files": [],
   "references": [
+    { "path": "./lib/site-config" },
     {
       "path": "./lib/db"
     },

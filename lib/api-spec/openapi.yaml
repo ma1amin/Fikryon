@@ -24,8 +24,158 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+  /subscribe:
+    post:
+      operationId: subscribe
+      summary: Register for launch notifications
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubscriptionInput'
+      responses:
+        '201':
+          description: Subscriber saved; delivery jobs queued
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionResult'
+        '200':
+          description: Already registered
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionResult'
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+        '429':
+          description: Too many submissions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+        '503':
+          description: Email signup unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+  /unsubscribe:
+    post:
+      operationId: unsubscribe
+      summary: Confirm unsubscribe using the secret token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UnsubscribeInput'
+      responses:
+        '200':
+          description: Unsubscribed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsubscribeResult'
+        '400':
+          description: Invalid token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+        '503':
+          description: Storage unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+  /cron/email-delivery:
+    get:
+      operationId: deliverEmailJobs
+      summary: Process email jobs; production scheduler only
+      security:
+        - cronSecret: []
+      responses:
+        '200':
+          description: Batch completed or delivery disabled
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmailDeliveryResult'
+        '401':
+          description: Invalid scheduler authentication
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+        '503':
+          description: Worker unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
 components:
+  securitySchemes:
+    cronSecret:
+      type: http
+      scheme: bearer
   schemas:
+    SubscriptionInput:
+      type: object
+      required: [email, lang]
+      properties:
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        lang:
+          type: string
+          enum: [ar, en]
+        website:
+          type: string
+          maxLength: 200
+    SubscriptionResult:
+      type: object
+      required: [registered]
+      properties:
+        registered:
+          type: boolean
+    UnsubscribeInput:
+      type: object
+      required: [token]
+      properties:
+        token:
+          type: string
+          pattern: '^[a-f0-9]{64}$'
+    UnsubscribeResult:
+      type: object
+      required: [unsubscribed]
+      properties:
+        unsubscribed:
+          type: boolean
+    ErrorResult:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: string
+    EmailDeliveryResult:
+      type: object
+      required: [sent, failed, cancelled]
+      properties:
+        sent:
+          type: integer
+        failed:
+          type: integer
+        cancelled:
+          type: integer
+        disabled:
+          type: boolean
     HealthStatus:
       type: object
       properties:

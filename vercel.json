@@ -7,7 +7,8 @@
       "installCommand": "corepack pnpm install --frozen-lockfile",
       "entrypoint": "src/app.ts",
       "buildCommand": "pnpm run build",
-      "devCommand": "pnpm run dev"
+      "devCommand": "pnpm run dev",
+      "functions": { "src/app.ts": { "maxDuration": 60 } }
     },
     "fikryon-coming-soon": {
       "root": "artifacts/fikryon-coming-soon",
@@ -26,6 +27,7 @@
       "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
     }
   },
+  "crons": [{ "path": "/api/cron/email-delivery", "schedule": "0 21 * * *" }],
   "rewrites": [
     { "source": "/api", "destination": { "service": "api-server" } },
     { "source": "/api/(.*)", "destination": { "service": "api-server" } },

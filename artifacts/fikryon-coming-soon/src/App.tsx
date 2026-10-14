@@ -2,6 +2,7 @@ import { type ReactNode } from 'react';
 import { ErrorBoundary } from '@/components/error-boundary';
 import NotFound from '@/pages/not-found';
 import ComingSoon from '@/pages/coming-soon';
+import Unsubscribe from '@/pages/unsubscribe';
 import { Route, Switch, useLocation, Router as WouterRouter } from 'wouter';
 
 function RoutedErrorBoundary({ children }: { children: ReactNode }) {
@@ -15,6 +16,7 @@ function App() {
       <RoutedErrorBoundary>
         <Switch>
           <Route path="/" component={ComingSoon} />
+          <Route path="/unsubscribe" component={Unsubscribe} />
           <Route component={NotFound} />
         </Switch>
       </RoutedErrorBoundary>

@@ -15,6 +15,7 @@
     }
   },
   "references": [
+    { "path": "../../lib/site-config" },
     {
       "path": "../../lib/api-client-react"
     }

@@ -5,12 +5,11 @@
  */
 
 // Launch moment (Riyadh time, UTC+3). Change this single line to move the launch.
-export const LAUNCH_DATE = "2026-11-03T00:00:00+03:00";
+export { LAUNCH_DATE, CONTACT_EMAIL } from "@workspace/site-config";
 // Progress percentage counts down from this configured start moment to launch.
 export const COUNTDOWN_START_DATE = "2026-10-14T00:00:00+03:00";
 
 // Official contact / social values supplied by FIKRYON.
-export const CONTACT_EMAIL = "info@fikryon.com";
 export const LINKEDIN_URL = "https://www.linkedin.com/company/fikryon-company/posts/?viewAsMember=true";
 export const TWITTER_URL = "https://x.com/fikryonai";
 
