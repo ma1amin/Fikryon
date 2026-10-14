@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "FIKRYON Coming Soon"
+description = "A bilingual Arabic and English launch page for FIKRYON Innovation & Technology, with light and dark themes, a live countdown, responsive layouts, and an email notification form."
+version = "1.0.0"
+id = "artifacts/fikryon-coming-soon"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 21839
+
+[services.development]
+run = "pnpm --filter @workspace/fikryon-coming-soon run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/fikryon-coming-soon", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/fikryon-coming-soon/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "21839"
+BASE_PATH = "/"

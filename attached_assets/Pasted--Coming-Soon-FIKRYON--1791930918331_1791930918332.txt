@@ -1,0 +1,676 @@
+أريد إعادة تصميم صفحة **Coming Soon / الانطلاق قريبًا** لشركة **FIKRYON | فيكريون للابتكار والتقنية** داخل نفس مشروع Replit الحالي.
+
+مهم جدًا: لا أريد نسخة تقليدية من صفحات Coming Soon. أريد صفحة احترافية تعكس أن FIKRYON شركة ابتكار وتقنية، وتبدو كامتداد طبيعي لهوية الموقع الرئيسي.
+
+الصفحة يجب أن تدعم بشكل كامل:
+
+- العربية
+- الإنجليزية
+- الوضع النهاري Light Mode
+- الوضع الليلي Dark Mode
+
+ويجب أن تعمل جميعها داخل نفس الصفحة بدون Reload.
+
+---
+
+## 1. Language Switcher — Arabic / English
+
+ضع في أعلى الصفحة زر تبديل لغة بسيط وأنيق:
+
+**AR | EN**
+
+### Arabic
+عند اختيار العربية:
+
+- `lang="ar"`
+- `dir="rtl"`
+- جميع النصوص بالعربية
+- اتجاه العناصر والنماذج مناسب للعربية
+
+### English
+عند اختيار English:
+
+- `lang="en"`
+- `dir="ltr"`
+- جميع النصوص بالإنجليزية
+- يتم تعديل اتجاه العناصر والمحاذاة تلقائيًا
+
+يجب أن يتغير عند تبديل اللغة:
+
+- العنوان
+- الوصف
+- السلوغن
+- العداد
+- Labels
+- Buttons
+- Placeholder
+- Contact section
+- Success messages
+- Footer
+
+احفظ اختيار المستخدم باستخدام:
+
+`localStorage`
+
+حتى تبقى اللغة المختارة عند زيارته التالية.
+
+---
+
+# 2. Light / Dark Mode — مهم جدًا
+
+أريد وضعين بصريين كاملين:
+
+### Dark Mode
+استخدم هوية FIKRYON الداكنة:
+
+- Deep Green
+- Dark Emerald
+- Gold accents
+- Ivory text
+
+يجب أن يبدو:
+- Premium
+- Elegant
+- Futuristic
+- Technology-focused
+
+الخلفية تكون خضراء داكنة جدًا مع تأثيرات ذهبية وخضراء ناعمة.
+
+---
+
+### Light Mode
+
+أريد نسخة نهارية راقية تعتمد بشكل رئيسي على:
+
+- Ivory / Cream background
+- Dark Green typography
+- Gold accents
+- Soft green details
+
+لا تجعل الخلفية بيضاء صافية.
+
+استخدم اللون العاجي الخاص بالهوية:
+
+`#FAF7EF`
+
+ويكون التصميم:
+- نظيف
+- راقٍ
+- هادئ
+- Premium
+- Modern
+
+أريد Light Mode يبدو مصممًا خصيصًا وليس مجرد عكس ألوان الوضع الليلي.
+
+---
+
+## 3. Theme Switcher
+
+ضع زرًا أنيقًا في أعلى الصفحة بجوار Language Switcher.
+
+استخدم Icons بسيطة:
+
+☀️ Light  
+🌙 Dark
+
+لكن يفضل استخدام SVG Icons احترافية بدل Emoji.
+
+يجب أن يحدث التغيير مباشرة بدون Reload.
+
+احفظ اختيار المستخدم في:
+
+`localStorage`
+
+إذا لم يسبق للمستخدم اختيار Theme، يمكن قراءة إعداد الجهاز:
+
+`prefers-color-scheme`
+
+---
+
+# 4. Header Controls
+
+في أعلى الصفحة ضع Controls بسيطة جدًا:
+
+**AR | EN**
+
+وبجوارها:
+
+**Light / Dark Toggle**
+
+تكون في زاوية مناسبة حسب اللغة:
+
+- العربية: RTL
+- English: LTR
+
+ولا تجعلها بارزة أكثر من التصميم الرئيسي.
+
+---
+
+# 5. Typography — مهم جدًا
+
+النسخة الحالية تستخدم Cairo وCinzel، ولا أريد استخدامها.
+
+افحص الموقع الرئيسي وملفات مشروع FIKRYON وحدد **نفس الخطوط المستخدمة في الموقع الأساسي**.
+
+استخدمها في صفحة Coming Soon.
+
+لا تستخدم خطوطًا جديدة من عندك إذا كان الخط الأساسي موجودًا داخل المشروع.
+
+أريد:
+
+- Arabic typography حديث ونظيف
+- English typography حديث وأنيق
+- Headings واضحة
+- Body مريح للقراءة
+- أوزان متوازنة
+
+لا تستخدم خطًا زخرفيًا ثقيلًا للعناوين.
+
+---
+
+# 6. FIKRYON Brand Colors
+
+استخدم الهوية:
+
+Dark Green:
+
+`#075E54`
+
+Gold:
+
+`#C9A227`
+
+Ivory:
+
+`#FAF7EF`
+
+يمكن إضافة درجات فرعية مشتقة منها فقط عند الحاجة للـ gradients والـ shadows.
+
+لا تدخل ألوانًا بعيدة عن الهوية.
+
+---
+
+# 7. Official Logo
+
+استخدم الشعار الرسمي الموجود داخل ملفات FIKRYON.
+
+لا ترسم شعارًا جديدًا.
+
+لا تعيد إنشاء FK باستخدام SVG من عندك.
+
+استخدم Asset الشعار الأصلي الموجود في المشروع.
+
+يظهر:
+
+**FIKRYON**
+
+**فيكريون**
+
+ومعه:
+
+**للابتكار والتقنية**
+
+**Innovation & Technology**
+
+اجعل الشعار أنيقًا ومتوازنًا وليس ضخمًا.
+
+---
+
+# 8. Animated Background
+
+أريد خلفية متحركة تعكس:
+
+- Innovation
+- Technology
+- Ideas
+- Connections
+- Digital transformation
+
+استخدم مزيجًا خفيفًا من:
+
+- Floating particles
+- Connected nodes
+- Soft network lines
+- Moving light
+- Small glowing points
+- Abstract flowing shapes
+
+يمكن لبعض النقاط أن تتفاعل بشكل بسيط مع Mouse Movement.
+
+الحركة يجب أن تكون:
+
+- بطيئة
+- هادئة
+- راقية
+- Fluid
+- غير مزعجة
+
+---
+
+## Dark Animation
+
+في Dark Mode:
+
+- Golden particles
+- Soft green nodes
+- Subtle gold network
+- Gentle glow
+
+---
+
+## Light Animation
+
+في Light Mode:
+
+- Soft green lines
+- Very subtle gold particles
+- Ivory background
+- Faint geometric / network effects
+
+لا تجعل الـAnimation بنفس القوة الموجودة في Dark Mode.
+
+---
+
+# 9. ممنوع استخدام Code Rain
+
+لا تستخدم:
+
+- Matrix effect
+- Falling binary numbers
+- أكواد برمجية متساقطة
+- خلفية مليئة بـ 0 و1
+- حركة تشوش على القراءة
+
+أريد Technology بشكل راقٍ وليس Hacker Style.
+
+---
+
+# 10. Main Hero — Arabic Version
+
+Small Badge:
+
+**نجهّز لكم شيئًا مميزًا**
+
+Main Heading:
+
+**الانطلاق قريبًا**
+
+Tagline:
+
+**بين الفكرة والأثر، نصنع الإمكان**
+
+Description:
+
+**فيكريون للابتكار والتقنية نبتكر ونطوّر حلولًا رقمية وتقنية تحوّل الأفكار والتحديات إلى فرص وحلول قابلة للتطبيق، وتصنع أثرًا حقيقيًا للأعمال.**
+
+---
+
+# 11. Main Hero — English Version
+
+Badge:
+
+**Something remarkable is taking shape**
+
+Main Heading:
+
+**Launching Soon**
+
+Tagline:
+
+**Between Ideas and Impact, We Create Possibility**
+
+Description:
+
+**FIKRYON Innovation & Technology creates and develops digital and technology solutions that transform ideas and business challenges into practical opportunities and meaningful impact.**
+
+---
+
+# 12. Countdown
+
+أضف Countdown أنيقًا.
+
+الأرقام:
+
+- Days
+- Hours
+- Minutes
+- Seconds
+
+### Arabic Labels
+
+**يوم**
+
+**ساعة**
+
+**دقيقة**
+
+**ثانية**
+
+### English Labels
+
+**Days**
+
+**Hours**
+
+**Minutes**
+
+**Seconds**
+
+استخدم تصميم:
+
+- Minimal
+- Glass effect
+- Premium
+- Transparent cards
+- Soft border
+- Subtle shadows
+
+لكن يجب أن يتغير شكل Glass effect حسب Light / Dark Mode.
+
+---
+
+## Launch Date
+
+اجعل التاريخ واضحًا جدًا في ملف الإعدادات:
+
+```javascript
+const LAUNCH_DATE = "2026-11-03T00:00:00+03:00";
+```
+
+ويكون من السهل تغييره لاحقًا.
+
+---
+
+# 13. Final Touches Message
+
+تحت العداد:
+
+Arabic:
+
+**نضع اللمسات الأخيرة**
+
+English:
+
+**Putting the final touches in place**
+
+لا تستخدم:
+
+"اكتمل 78% من الموقع"
+
+ولا تعرض نسبة جاهزية للموقع.
+
+---
+
+# 14. Notify Section
+
+أضف Section:
+
+### Arabic
+
+**كن أول من يعرف عند الإطلاق**
+
+Placeholder:
+
+**أدخل بريدك الإلكتروني**
+
+Button:
+
+**أعلمني عند الإطلاق**
+
+Success:
+
+**شكرًا لك! سنخبرك فور انطلاق فيكريون.**
+
+---
+
+### English
+
+**Be the first to know when we launch**
+
+Placeholder:
+
+**Enter your email address**
+
+Button:
+
+**Notify Me**
+
+Success:
+
+**Thank you! We'll let you know as soon as FIKRYON launches.**
+
+---
+
+في الوقت الحالي يمكن أن يكون Front-End فقط.
+
+لكن اكتب Structure واضحًا ليسهل ربطه لاحقًا بخدمة Email أو API.
+
+ضع Comment واضح في الكود:
+
+`EMAIL SUBSCRIPTION INTEGRATION HERE`
+
+---
+
+# 15. Social Media
+
+في أسفل الصفحة أضف Social Icons أنيقة:
+
+- LinkedIn
+- X / Twitter
+- Email
+
+كل Icon يجب أن يكون Clickable.
+
+استخدم روابط FIKRYON الموجودة في المشروع.
+
+لا تخترع أي URL.
+
+استخدم رابط X / Twitter الخاص بـ FIKRYON إذا كان موجودًا في ملفات المشروع.
+
+إذا لم تجده، استخدم Placeholder:
+
+```javascript
+const TWITTER_URL = "TWITTER_URL_HERE";
+```
+
+ولا تستبدله بأي رابط افتراضي.
+
+---
+
+# 16. Contact
+
+Arabic:
+
+**تواصل معنا**
+
+English:
+
+**Connect With Us**
+
+استخدم البريد الرسمي الموجود في مشروع FIKRYON.
+
+اجعله يعمل باستخدام:
+
+`mailto:`
+
+---
+
+# 17. Responsive Design
+
+يجب أن تكون الصفحة ممتازة على:
+
+- Mobile
+- Tablet
+- Laptop
+- Desktop
+- Large Screens
+
+خصوصًا Mobile.
+
+تأكد أن:
+
+- Countdown لا يتداخل
+- Controls تبقى واضحة
+- الشعار لا يصبح ضخمًا
+- النص لا يخرج من الشاشة
+- Email field مناسب للجوال
+- Social icons لا تختفي
+- لا يوجد Horizontal Scroll
+
+---
+
+# 18. Animation on Page Load
+
+استخدم:
+
+- Fade
+- Fade Up
+- Soft scale
+- Gentle glow
+
+لكن لا تجعل كل عنصر يتحرك بشكل مختلف.
+
+أريد Animation Style موحد واحترافي.
+
+---
+
+# 19. Hover Effects
+
+أضف Hover بسيط على:
+
+- Buttons
+- Social icons
+- Theme switch
+- Language switch
+- Email field
+
+مثال:
+
+- subtle translateY
+- soft glow
+- border highlight
+
+بدون Effects قوية.
+
+---
+
+# 20. Accessibility
+
+احترم:
+
+`prefers-reduced-motion`
+
+وأوقف معظم الحركات إذا كان المستخدم يفضل تقليل الحركة.
+
+استخدم Contrast مناسب في Light وDark Mode.
+
+ضع `aria-label` للأيقونات والأزرار.
+
+---
+
+# 21. SEO
+
+Arabic / English SEO.
+
+Main title:
+
+**FIKRYON | فيكريون للابتكار والتقنية**
+
+English:
+
+**FIKRYON | Innovation & Technology**
+
+Meta Description:
+
+**فيكريون للابتكار والتقنية — بين الفكرة والأثر، نصنع الإمكان.**
+
+English description:
+
+**FIKRYON Innovation & Technology — Between Ideas and Impact, We Create Possibility.**
+
+---
+
+# 22. Footer
+
+Arabic:
+
+**© 2026 فيكريون للابتكار والتقنية. جميع الحقوق محفوظة.**
+
+English:
+
+**© 2026 FIKRYON Innovation & Technology. All Rights Reserved.**
+
+يتغير تلقائيًا حسب اللغة.
+
+---
+
+# 23. المطلوب النهائي
+
+الزائر يجب أن يستطيع اختيار أي من الحالات الأربع:
+
+### Arabic + Light
+
+### Arabic + Dark
+
+### English + Light
+
+### English + Dark
+
+ويجب أن تعمل كل حالة بشكل كامل ومستقل.
+
+احفظ:
+
+- اللغة المختارة
+- Theme المختار
+
+في `localStorage`.
+
+---
+
+# 24. التصميم المطلوب
+
+لا أريد Template جاهزًا.
+
+أريد تصميمًا يبدو كأنه صُمم خصيصًا لشركة:
+
+**FIKRYON Innovation & Technology**
+
+ويجمع بين:
+
+**Innovation**
+
+**Technology**
+
+**Premium**
+
+**Elegance**
+
+**Movement**
+
+**Saudi / Regional Professional Identity**
+
+---
+
+# 25. قبل إنهاء العمل
+
+تحقق من التالي:
+
+1. الشعار هو Logo الرسمي.
+2. الخطوط هي نفس خطوط الموقع الأساسي.
+3. العربية RTL صحيحة.
+4. English LTR صحيح.
+5. AR / EN Switch يعمل.
+6. Light / Dark Switch يعمل.
+7. Preferences تحفظ بعد Refresh.
+8. Countdown يعمل.
+9. التاريخ قابل للتغيير بسهولة.
+10. Social links صحيحة.
+11. Email صحيح.
+12. Mobile View ممتاز.
+13. الحركة هادئة.
+14. Light Mode أنيق وليس أبيض فارغًا.
+15. Dark Mode فخم وليس شديد السواد.
+16. لا يوجد Code Rain.
+17. لا يوجد Progress Percentage.
+18. لا تخترع روابط أو معلومات.
+19. اعرض Preview للنسخ الأربع قبل اعتماد التصميم النهائي.
