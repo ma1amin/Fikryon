@@ -91,6 +91,7 @@ terminal; do not paste the secret into URLs or shared logs.
 pnpm --filter @workspace/api-server test
 pnpm run typecheck
 pnpm -r --filter './artifacts/**' run build
+node scripts/check-api-bundle.mjs
 vercel dev -L
 ```
 
