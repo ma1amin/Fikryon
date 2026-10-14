@@ -7,6 +7,9 @@ build or runtime overrides.
 Each service installs through Corepack with the pinned pnpm version, preserving
 the lockfile and workspace install policies. The pnpm-only preinstall check uses
 Node.js so installation works on both Windows and Linux.
+Dependency install scripts use pnpm 11's `allowBuilds` map, preserving the
+existing allowlist including esbuild. Validate installs without `--ignore-scripts`
+to check this policy as well as the lockfile.
 
 ## Proposed routing (pending owner confirmation)
 
