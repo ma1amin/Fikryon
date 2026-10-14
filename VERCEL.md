@@ -1,0 +1,59 @@
+# Vercel deployment
+
+Import `ma1amin/Fikryon` as one Vercel project with the repository root as
+the project's Root Directory. The root `vercel.json` defines three services.
+Keep build settings in those service definitions, rather than adding top-level
+build or runtime overrides.
+Each service installs through Corepack with the pinned pnpm version, preserving
+the lockfile and workspace install policies. The pnpm-only preinstall check uses
+Node.js so installation works on both Windows and Linux.
+
+## Proposed routing (pending owner confirmation)
+
+| Service | Public path | Entry/build output |
+| --- | --- | --- |
+| `api-server` | `/api` and `/api/*` | Express default export in `src/app.ts` |
+| `fikryon-coming-soon` | `/` and all remaining paths | `dist/public` |
+| `mockup-sandbox` | Internal only; no public rewrite | `dist` |
+
+Service rewrites preserve the original request path. The API already mounts its
+router at `/api`, so its health endpoint is `/api/healthz`. The generated browser
+API client also uses `/api/healthz` on the same origin. The Vite services have
+service-scoped SPA rewrites so client-side routes reach their HTML entrypoints.
+
+The main site defaults to `BASE_PATH=/`. Vite no longer requires `PORT` or
+`BASE_PATH` during builds. Existing environment overrides still work. If the
+sandbox is made public under a prefix later, configure its Vite base to match
+that prefix and route its HTML and assets into the sandbox service.
+
+## Bindings and environment
+
+No bindings are declared: no running server-side code currently calls another
+service. The Vite applications are browser-only; bindings resolve in functions
+at runtime and must never be embedded in a browser bundle or supplied manually.
+The main site's email subscription remains a simulated UI operation; deployment
+does not implement a subscription API or persistence.
+
+The API health endpoint does not use the database. `DATABASE_URL` is needed if
+code starts importing `@workspace/db`, which is currently unused by the routes.
+
+## Local verification
+
+Install dependencies with pnpm, then run:
+
+```sh
+pnpm run typecheck
+pnpm --filter @workspace/api-server run build
+pnpm --filter @workspace/fikryon-coming-soon run build
+pnpm --filter @workspace/mockup-sandbox run build
+vercel dev -L
+```
+
+`vercel dev -L` runs all services locally without a cloud login. Verify `/` loads
+the website and `/api/healthz` returns `{"status":"ok"}`. Requests to `/api/*`
+must stay with Express even when no API route matches. The sandbox has no public
+ingress. Any future binding URL is injected by Vercel automatically.
+
+References: [Services](https://vercel.com/docs/services),
+[routing](https://vercel.com/docs/services/routing),
+[bindings](https://vercel.com/docs/services/bindings).

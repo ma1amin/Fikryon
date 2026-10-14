@@ -2,9 +2,10 @@
   "name": "@workspace/api-server",
   "version": "0.0.0",
   "private": true,
+  "packageManager": "pnpm@11.25.0",
   "type": "module",
   "scripts": {
-    "dev": "export NODE_ENV=development && pnpm run build && pnpm run start",
+    "dev": "pnpm run build && pnpm run start",
     "build": "node ./build.mjs",
     "start": "node --enable-source-maps ./dist/index.mjs",
     "typecheck": "tsc -p tsconfig.json --noEmit"
